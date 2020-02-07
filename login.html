@@ -1,0 +1,188 @@
+<!--<?php
+require "common.php";
+?>-->
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+        <!--jQuery library--> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!--Latest compiled and minified JavaScript--> 
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+             #head{
+                margin-top:100px;
+                padding-top:0px;
+                margin-bottom:- 5px;
+              
+            }
+             #bid{
+                padding-left:450px;
+                padding-bottom: 5px;
+               
+            }
+             #panelfoot{
+                margin-bottom:-1px;
+            }
+            h2{
+                padding-right:65px;
+            }
+            #p1{
+                padding-bottom:15px;
+                padding-right: 20px;
+            }
+             #footer{
+                 padding: 10px 0px;
+                       background-color: #101010; 
+                  color:#9d9d9d; 
+                  bottom: 10px; 
+                  width: 100%; 
+                  padding-top:-60px;
+            }
+            #down{
+                padding-top:185px;
+            }
+            #space{
+                padding-top:5px;
+                margin-top:-18px;
+                margin-bottom:-10px;
+            }
+ 
+        </style>
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">    
+    <div class="container">  
+        <div class="navbar-header">  
+            <button type="button" class="navbar-toggle" data-toggle="collapse" datatarget="#myNavbar">            
+                <span class="icon-bar"></span>             
+                <span class="icon-bar"></span>             
+                <span class="icon-bar"></span>                 
+            </button>    
+            <a class="navbar-brand" href="index.html"><span class="glyphicon glyphicon-home"></span> Start Up</a>      
+        </div>        
+        <div class="collapse navbar-collapse" id="myNavbar">     
+            <ul class="nav navbar-nav navbar-right">               
+    
+   <!--  <li><a href = "cart.php"><span class ="glyphicon glyphicon-shoppingcart"></span> Cart </a></li>   -->
+     <li><a href = "settings.html"><span class = "glyphicon glyphicon-user"></span> Settings</a></li>       
+     <li><a href = "index.html"><span class ="glyphicon glyphicon-log-out"></span> Logout</a></li> 
+            </ul> 
+                </div>
+    </div>
+        </div>
+       
+         <div class="container">
+            <div class="row">
+                <div class="col-sd-6">
+                    <div id="head">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <center>
+                                <h2><p><b>LOGIN </b></p></h2>
+                        
+                            </center>
+                        </div>
+                        <div class="panel-body" id="head">
+                            <center id="logo">
+                                <h4><p id="p1"><strong>LOGIN FOR FURTHER DETAILS </strong></p></h4>
+                            </center>
+                            <div class="row" id="bid">
+                                <div class="col-xs-4">
+                                    
+                            <div class="form-group">
+                              
+                            <form  method="post" >
+                                <label for="email">Email</label>
+                               
+                                <input type="text" class="form-control" name="email" id="box">
+                               
+                                <label for="password">Password</label>
+                                <input type="text" class="form-control" name="password"><br>
+                                <button type="submit"><a href="startup_page.html">Login as mentor</a></button><br><br>
+                                
+                                
+                            <form method="get" action="file:///C:/Users/SAIRAM/Desktop/Startup%20Hacakthon/startup_page.html">
+                            <button type="submit" id="btn" class="btn btn-primary">Login as Student</button>
+                                </form>
+                                </form>
+                    </div>
+                                    
+                            </div>
+                            </div>
+                            
+                            </div>
+                        <div class="panel panel-footer"id="panelfoot" >
+                            <center>
+                                <h4>Don't have an account? <a href="file:///C:/Users/SAIRAM/Desktop/Startup%20Hacakthon/register.html">Register</a></h4>
+                            </center>
+                        </div>
+                    </div>
+            
+        </div>
+            </div>
+            </div>
+             
+        </div>
+        <script   src="https://code.jquery.com/jquery-3.4.1.js"   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="   crossorigin="anonymous"></script>
+                <script>
+            
+            let startups = [];
+        // example {id:1592304983049, title: 'Deadpool', year: 2015}
+        function addstartups(ev){
+            ev.preventDefault();  //to stop the form submitting
+            let startup = {
+                id: Date.now(),
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                cpassword: document.getElementById('cpassword').value,
+                genre: document.getElementById('genre').value,
+                address: document.getElementById('address').value
+                
+            };
+            //console.log("done object");
+            startups.push(startup);
+            console.log("push done");
+          //  document.forms[0].reset(); // to clear the form for the next entries
+            document.getElementById('form').reset();
+            console.log("form reset done");
+            console.log(startups);
+           //for display purposes only
+            //console.log('added' ,{startups} );
+           // let pre = document.getElementById('pre');
+            var obj = JSON.stringify(startups);
+            console.log("done1");
+
+            //saving to localStorage
+            //localStorage.setItem('MystartupList',  JSON.stringify(startups));
+        };
+        document.addEventListener('DOMContentLoaded', ()=>{
+            //console.log("varun1");
+            document.getElementById('btn').addEventListener('click', onclick);
+            //console.log("varun2");
+        });
+                    function onclick (){
+                    var xhr = new XMLHttpRequest();
+        var url = 'http://127.0.0.1:8000/login/';
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var json = JSON.parse(xhr.responseText);
+                console.log(json.email + ", " + json.password);
+            }
+        };
+                    addstartups()
+        var data = obj;
+                    
+        xhr.send(data);
+                    }
+//                    $.post('http://127.0.0.1:8000/login/', {obj})
+            </script>
+        
+         
+    </body>
+    
+</html>
+
