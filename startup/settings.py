@@ -66,7 +66,9 @@ ROOT_URLCONF = 'startup.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'frontend/build'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -149,4 +151,8 @@ LOGOUT_REDIRECT_URL = '/profile/login'
 
 CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:58885',
+]
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend/build/static'),
 ]
